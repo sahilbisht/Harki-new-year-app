@@ -33,7 +33,7 @@ app.put("/completed", function (req, res) {
   const parsedPayload = updateTodo.safeParse(updatePayload);
   if (!parsedPayload.success) {
     req.status(411).json({
-      msg: "You sent the wrong inputs",
+      msg: "You sent the wrong inputss",
     });
     return;
   }
