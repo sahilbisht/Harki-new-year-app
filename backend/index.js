@@ -3,12 +3,13 @@
 
 const express = require("express");
 const { createTodo, updateTodo } = require("./types");
+const { todo } = require("./db");
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
-app.post("/todo", function (req, res) {
+app.post("/todo", async function (req, res) {
   const createPayload = req.body;
   const parsedPayload = createTodo.safeParse(createPayload);
   if (!parsedPayload.success) {
@@ -17,6 +18,13 @@ app.post("/todo", function (req, res) {
     });
     return;
   }
+  await todo.create({
+    title: createPayload.title,
+    description: createPayload.description,
+  });
+  res.json({
+    msg: "Todo created",
+  });
 });
 app.get("/todos", function (req, res) {});
 
