@@ -5,9 +5,10 @@ const express = require("express");
 const { createTodo, updateTodo } = require("./types");
 const { todo } = require("./db");
 const app = express();
-const port = 3000;
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 
 app.post("/todo", async function (req, res) {
   const createPayload = req.body;
@@ -58,6 +59,4 @@ app.put("/completed", async function (req, res) {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+app.listen(3000);
